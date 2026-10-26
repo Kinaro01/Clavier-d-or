@@ -82,6 +82,9 @@ func Creer_sauvegarde(v_pseudo string) int64 {
 		saveTheme.Id, err = resultat_theme.LastInsertId()
 		GestionErreur(err)
 
+		err = row_theme.Err()
+		GestionErreur(err)
+
 		// initialisation de la structure de sauvegarde de questions
 		var saveQuestion models.SauvegardeQuestion
 		saveQuestion.Complete = false
@@ -101,6 +104,8 @@ func Creer_sauvegarde(v_pseudo string) int64 {
 			_, err = resultat_question.LastInsertId()
 			GestionErreur(err)
 		}
+		err = row_question.Err()
+		GestionErreur(err)
 	}
 	return s.Id
 }

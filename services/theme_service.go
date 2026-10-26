@@ -22,5 +22,7 @@ func Afficher_theme(v_id_save int64) []models.Theme{
 		GestionErreur(err)
 		v_return = append(v_return, t)
 	}
+	err = liste_theme.Err()
+	GestionErreur(err)
 	return v_return
 }

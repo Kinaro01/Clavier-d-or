@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Clavier d'or</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -17,14 +18,15 @@
     <p>Question : <span id="Libelle"></span></p>
     <p id="Indice"></p>
 
-    <button id="ReponseA">ReponseA</button>
-    <button id="ReponseB">ReponseB</button>
-    <button id="ReponseC">ReponseC</button>
-    <button id="ReponseD">ReponseD</button>
+    <div class="reponses">
+        <button id="ReponseA"></button>
+        <button id="ReponseB"></button>
+        <button id="ReponseC"></button>
+        <button id="ReponseD"></button>
+    </div>
 
     <footer>
         <button id="btn_indice">Indice</button>
-        <button id="btn_passer">Passer</button>
     </footer>
 
     <script src="/js/question.js" defer></script>

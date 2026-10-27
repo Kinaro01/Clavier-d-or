@@ -81,7 +81,6 @@ AfficherQuestion();
 
 
 async function VerifierQuestion(choixReponse) {
-    console.log("Réponse envoyée :", choixReponse);
     try {
          // récupération id de la save
         const idSauvegarde = sessionStorage.getItem("id_sauvegarde");

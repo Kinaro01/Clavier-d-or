@@ -3,6 +3,8 @@ package services
 import (
 	"database/sql"
 	"projet/models"
+
+
 )
 
 
@@ -37,8 +39,8 @@ func Resultat_question(v_choix_reponse_utilisateur string, q models.Question, v_
 	return resultat
 }
 
-func Passer_question(q models.Question, v_id_save int64) bool{
-	Base_donnees().QueryRow("UPDATE sauvegardeQuestion SET complete = 1 WHERE sauvegardeQuestion.question_id = ?", q.Id)
-	Base_donnees().QueryRow("UPDATE sauvegardeTheme SET theme_demarre = 1 WHERE sauvegardeTheme.theme_id = ? AND sauvegardeTheme.sauvegarde_id = ?", q.Theme_id, v_id_save)
-	return false
-}
+//func Passer_question(q models.Question, v_id_save int64) bool{
+	//Base_donnees().QueryRow("UPDATE sauvegardeQuestion SET complete = 1 WHERE sauvegardeQuestion.question_id = ?", q.Id)
+	//Base_donnees().QueryRow("UPDATE sauvegardeTheme SET theme_demarre = 1 WHERE sauvegardeTheme.theme_id = ? AND sauvegardeTheme.sauvegarde_id = ?", q.Theme_id, v_id_save)
+	//return false
+//}

@@ -21,4 +21,8 @@ func SetupRoutes(router *gin.Engine) {
         c.HTML(200, "question.html", nil)
     })
 
+    router.GET("/resultat", func(c *gin.Context) {
+        c.HTML(200, "resultat.html", nil)
+    })
+
 }

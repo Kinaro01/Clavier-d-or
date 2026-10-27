@@ -25,7 +25,7 @@ func main() {
 	router.GET("/api/affichertheme", routes.AfficherTheme)
 	router.GET("/api/scoretheme", routes.ScoreTheme)
 	router.GET("/api/afficherquestion", routes.AfficherQuestion)
+	router.PUT("/api/verifierquestion", routes.VerifierQuestion)
 	
-
     router.Run(":8080")
 }

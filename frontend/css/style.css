@@ -1,3 +1,27 @@
 #Indice {
     visibility: hidden;
 }
+
+.reponse-correcte {
+    background-color: green;
+    color: white;
+}
+
+.reponse-incorrecte {
+    background-color: red;
+    color: white;
+}
+
+#QuestionSuivante {
+    display: none;
+}
+
+
+.reponses {
+    width: 200px;
+    min-height: 45px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    padding: 8px;
+    cursor: pointer;
+}

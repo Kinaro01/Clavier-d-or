@@ -1,4 +1,3 @@
-
 const boutonInscription = document.getElementById("btn_inscription");
 
 boutonInscription.addEventListener("click", async () => {

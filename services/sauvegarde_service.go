@@ -165,12 +165,6 @@ func Afficher_score_total(v_id_save int64) int64 {
 	return score_total
 }
 
-func Fin_de_partie(v_score_theme int) {
-	fmt.Println()
-	fmt.Println("Partie terminée !")
-	fmt.Println()
-}
-
 func Recommencer_theme(v_id_save int64, v_id_controle_sauvegarde_theme int64) {
 	Base_donnees().Exec("UPDATE sauvegardeQuestion SET complete = 0, score_question = 0 WHERE sauvegarde_id = ? AND sauvegarde_id_theme = ?", v_id_save, v_id_controle_sauvegarde_theme)
 	Base_donnees().Exec("UPDATE sauvegardeTheme SET theme_demarre = 0 WHERE sauvegarde_id = ? AND theme_id = ?", v_id_save, v_id_controle_sauvegarde_theme)

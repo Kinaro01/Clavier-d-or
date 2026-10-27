@@ -27,6 +27,7 @@ func main() {
 	router.GET("/api/afficherquestion", routes.AfficherQuestion)
 	router.PUT("/api/verifierquestion", routes.VerifierQuestion)
 	router.PUT("/api/recommencertheme", routes.Restart_theme)
+	router.GET("/api/exportpdf", routes.ExportPDF)
 	
     router.Run(":8080")
 }

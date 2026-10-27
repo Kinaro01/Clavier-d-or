@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 	"projet/models"
+	"github.com/signintech/gopdf"
 
 	_ "modernc.org/sqlite"
 )
@@ -168,4 +169,71 @@ func Afficher_score_total(v_id_save int64) int64 {
 func Recommencer_theme(v_id_save int64, v_id_controle_sauvegarde_theme int64) {
 	Base_donnees().Exec("UPDATE sauvegardeQuestion SET complete = 0, score_question = 0 WHERE sauvegarde_id = ? AND sauvegarde_id_theme = ?", v_id_save, v_id_controle_sauvegarde_theme)
 	Base_donnees().Exec("UPDATE sauvegardeTheme SET theme_demarre = 0 WHERE sauvegarde_id = ? AND theme_id = ?", v_id_save, v_id_controle_sauvegarde_theme)
+}
+
+
+// --------------------- Création pdf --------------------
+
+type PDF struct {
+	ID          int
+	Nom         string
+	Score 		int
+}
+
+
+func Exporter_PDF(v_id_save int64, v_id_theme int64) ([]byte, error){
+    // 1. Récupération des données
+    resultat_question, err := Base_donnees().Query("SELECT q.id, q.libelle, sq.score_question FROM questions q RIGHT JOIN sauvegardeQuestion sq ON q.id = sq.question_id WHERE sq.sauvegarde_id = ? AND sq.sauvegarde_id_theme = ? ORDER BY sq.question_id ASC", v_id_save, v_id_theme)
+    GestionErreur(err)
+    defer resultat_question.Close()
+
+    var v_liste_question []PDF
+    for resultat_question.Next() {
+        var p PDF
+        err := resultat_question.Scan(&p.ID, &p.Nom, &p.Score)
+        GestionErreur(err)
+        v_liste_question = append(v_liste_question, p)
+    }
+
+    // 2. Configuration du PDF
+    pdf := gopdf.GoPdf{}
+    pdf.Start(gopdf.Config{PageSize: *gopdf.PageSizeA4})
+    pdf.AddPage()
+
+    // Fichier .ttf sinon erreur
+    // "assets/arial.ttf" pour récupérer le chemin réel de la police sur le PC
+    err = pdf.AddTTFFont("Arial", "assets/arial.ttf")
+    if err != nil {
+        return nil, fmt.Errorf("Erreur chargement police: %w", err) 
+    }
+
+    err = pdf.SetFont("Arial", "", 14)
+    GestionErreur(err)
+
+    // 3. Écriture du titre
+    pdf.SetXY(30, 30)
+    pdf.Cell(nil, "Résultats du thème :")
+
+    // 4. Boucle sur les questions
+    currentY := 60.0
+    pdf.SetFont("Arial", "", 11)
+
+    for _, v_question := range v_liste_question {
+        pdf.SetXY(30, currentY)
+        texte := fmt.Sprintf("Question %d: %s - Score: %d", v_question.ID, v_question.Nom, v_question.Score)
+        pdf.Cell(nil, texte)
+
+		// Saut de ligne
+        currentY += 20
+
+        // Si Y > 800 pixels, alors nouvelle page
+        if currentY > 800 {
+            pdf.AddPage()
+            currentY = 30
+        }
+    }
+
+    // 5. Enregistrement final
+    contenuPDF := pdf.GetBytesPdf()
+	return contenuPDF, nil
 }

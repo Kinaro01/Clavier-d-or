@@ -61,16 +61,17 @@ async function AfficherQuestion() {
 
     const data = await response.json();
 
-    if (data === null) {
+    if (data === null || data === undefined) {
         window.location.href = "/resultat";
+        return;
     }
 
-    document.getElementById("Libelle").textContent = data.nom
-    document.getElementById("Indice").textContent = "Indice : "  + data.indice
-    document.getElementById("ReponseA").textContent = data.reponse_a
-    document.getElementById("ReponseB").textContent = data.reponse_b
-    document.getElementById("ReponseC").textContent = data.reponse_c
-    document.getElementById("ReponseD").textContent = data.reponse_d
+    document.getElementById("Libelle").textContent = data.nom ?? "";
+    document.getElementById("Indice").textContent = "Indice : "  + data.indice ?? "";
+    document.getElementById("ReponseA").textContent = data.reponse_a ?? "";
+    document.getElementById("ReponseB").textContent = data.reponse_b ?? "";
+    document.getElementById("ReponseC").textContent = data.reponse_c ?? "";
+    document.getElementById("ReponseD").textContent = data.reponse_d ?? "";
 
     } catch(error) {
         console.error(error);

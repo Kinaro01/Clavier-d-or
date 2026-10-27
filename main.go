@@ -26,6 +26,7 @@ func main() {
 	router.GET("/api/scoretheme", routes.ScoreTheme)
 	router.GET("/api/afficherquestion", routes.AfficherQuestion)
 	router.PUT("/api/verifierquestion", routes.VerifierQuestion)
+	router.PUT("/api/recommencertheme", routes.Restart_theme)
 	
     router.Run(":8080")
 }

@@ -89,4 +89,10 @@ boutonMenu.addEventListener("click", () => {
     window.location.href = "/accueil"
 });
 
+// bouton indice
+const boutonIndice = document.getElementById("btn_indice");
+const texteIndice = document.getElementById("Indice");
 
+boutonIndice.addEventListener("click", () => {
+    texteIndice.style.visibility = "visible";
+})

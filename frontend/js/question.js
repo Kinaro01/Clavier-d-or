@@ -215,6 +215,7 @@ document.getElementById("ReponseD").addEventListener("click", async function() {
 // Passer a la question suivante
 boutonSuivant.addEventListener("click", () => {
     boutonSuivant.style.display = "none";
+    texteIndice.style.visibility = "hidden"
 
     ReinitialiserCouleurs();
     AfficherQuestion();
